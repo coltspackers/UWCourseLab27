@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mylab27hildebrand
+  labels:
+    app: webnginx
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: hildomynginxwebpod
+  template:
+    metadata:
+      labels:
+        app: hildomynginxwebpod
+    spec:
+      containers:
+      - name: nginx
+        image: coltspackers/lab28:1.0.0
+        imagePullPolicy: Always 
+---
+apiVersion: v1 
+kind: Service 
+metadata: 
+    name: mylab27hildebrand 
+spec: 
+   selector: 
+     app: hildomynginxwebpod 
+   type: NodePort
+   ports: 
+        - protocol: TCP 
+          port: 80 
+          targetPort: 80 
+
